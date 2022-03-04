@@ -1,0 +1,85 @@
+<RelativeLayout android:orientation="vertical" android:padding="10dp" android:layout_width="match_parent" android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android"><TextView android:id="@id/lblHeader" android:text="Resumo do Pedido" android:textSize="22dp" android:gravity="center" android:textStyle="bold" android:textColor="#000" android:layout_width="match_parent" android:layout_height="wrap_content" /><android.support.design.widget.TextInputLayout android:id="@+id/textInputLayout5" android:layout_below="@+id/lblHeader" android:layout_alignParentLeft="true" android:layout_marginTop="10dp" android:layout_marginLeft="5dp" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"><android.support.design.widget.TextInputEditText android:id="@+id/txtNROPEDIDO" android:textSize="13dp" android:textAlignment="textEnd" android:fontFamily="sans-serif-condensed" android:hint="N° Pedido" android:inputType="number" android:digits="0123456789," android:imeOptions="actionDone" android:paddingBottom="5dp" android:layout_width="100dp" android:layout_height="35dp" /></android.support.design.widget.TextInputLayout><RelativeLayout android:id="@+id/relativeLayout3" android:layout_marginTop="10dp" android:layout_below="@id/textInputLayout5" android:layout_width="match_parent" android:layout_height="wrap_content"><ProgressBar android:id="@+id/progressBar1" android:layout_marginLeft="20dp" android:layout_width="30dp" android:layout_height="30dp" /><TextView android:layout_marginTop="5dp" android:layout_toRightOf="@+id/progressBar1" android:text="Aguardando o pedido ser selecionado ..." android:layout_marginLeft="5dp" android:textColor="#000" android:layout_width="match_parent" android:layout_height="wrap_content" /></RelativeLayout><RelativeLayout android:id="@+id/relativeLayout2" android:visibility="invisible" android:layout_marginTop="10dp" android:layout_below="@id/textInputLayout5" android:layout_width="match_parent" android:layout_height="wrap_content"><TextView android:id="@+id/lblNOMPESS" android:layout_below="@id/txtNROPEDIDO" android:textSize="16dp" android:text="Cliente :" android:textStyle="bold" android:textColor="#000" android:layout_width="wrap_content" android:layout_height="wrap_content" /><TextView android:id="@id/txNOMPESS" android:layout_below="@id/txtNROPEDIDO" android:layout_marginLeft="5dp" android:layout_toRightOf="@id/lblNOMPESS" android:textSize="16dp" android:textColor="#000" android:layout_width="wrap_content" android:layout_height="wrap_content" /><TextView android:id="@+id/lblDTAEMISS" android:layout_below="@+id/lblNOMPESS" android:textSize="16dp" android:text="Emissão :" android:textStyle="bold" android:textColor="#000" android:layout_width="wrap_content" android:layout_height="wrap_content" /><TextView android:id="@id/txData" android:layout_below="@+id/lblNOMPESS" android:layout_marginLeft="5dp" android:textColor="#000" android:layout_toRightOf="@id/lblDTAEMISS" android:textSize="16dp" android:layout_width="wrap_content" android:layout_height="wrap_content" /><TextView android:id="@+id/lblFMAPGMTO" android:layout_below="@+id/lblDTAEMISS" android:textSize="16dp" android:text="Forma de pagamento :" android:textStyle="bold" android:textColor="#000" android:layout_width="wrap_content" android:layout_height="wrap_content" /><TextView android:id="@+id/txtFRMPGTO" android:layout_below="@+id/lblDTAEMISS" android:layout_marginLeft="5dp" android:textColor="#000" android:layout_toRightOf="@id/lblFMAPGMTO" android:textSize="16dp" android:layout_width="wrap_content" android:layout_height="wrap_content" /><TextView android:id="@+id/lblDTAVCMTO" android:layout_below="@+id/lblFMAPGMTO" android:textSize="16dp" android:text="Vencimento :" android:textStyle="bold" android:textColor="#000" android:layout_width="wrap_content" android:layout_height="wrap_content" /><TextView android:id="@+id/txtDTAVCMTO" android:layout_below="@+id/lblFMAPGMTO" android:layout_marginLeft="5dp" android:textColor="#000" android:layout_toRightOf="@id/lblDTAVCMTO" android:textSize="16dp" android:layout_width="wrap_content" android:layout_height="wrap_content" /><TextView android:id="@+id/lblSTATUS" android:layout_below="@+id/lblDTAVCMTO" android:textSize="16dp" android:text="Status :" android:textStyle="bold" android:textColor="#000" android:layout_width="wrap_content" android:layout_height="wrap_content" /><TextView android:id="@+id/txtSTATUS" android:layout_below="@+id/lblDTAVCMTO" android:layout_marginLeft="5dp" android:textColor="#000" android:layout_toRightOf="@id/lblSTATUS" android:textSize="16dp" android:layout_width="wrap_content" android:layout_height="wrap_content" /></RelativeLayout><RelativeLayout android:id="@+id/relativeLayout1" android:visibility="invisible" android:layout_marginTop="20dp" android:paddingLeft="5dp" android:paddingRight="5dp" android:layout_below="@id/relativeLayout2" android:layout_width="match_parent" android:layout_height="wrap_content"><!---
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_below="@id/txtNROPEDIDO"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.CardView
+                android:backgroundTint="#1b5e20"
+                android:layout_width="30dp"
+                android:layout_height="15dp"/>
+            <TextView
+                android:text="Total"
+                android:layout_marginLeft="5dp"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <android.support.v7.widget.CardView
+                android:backgroundTint="#0277bd"
+                android:layout_marginLeft="5dp"
+                android:layout_width="30dp"
+                android:layout_height="15dp"/>
+            <TextView
+                android:text="Devolvido"
+                android:textStyle="bold"
+                android:layout_marginLeft="5dp"
+                android:textColor="#000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <android.support.v7.widget.CardView
+                android:backgroundTint="#ff5722"
+                android:layout_marginLeft="5dp"
+                android:layout_width="30dp"
+                android:layout_height="15dp"/>
+            <TextView
+                android:text="Comissão Cliente"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_below="@id/linearLayout1"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.CardView
+                android:backgroundTint="#1a237e"
+                android:layout_width="30dp"
+                android:layout_height="15dp"/>
+            <TextView
+                android:text="Valor Recebido"
+                android:layout_marginLeft="5dp"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <android.support.v7.widget.CardView
+                android:backgroundTint="#4e342e"
+                android:layout_marginLeft="5dp"
+                android:layout_width="30dp"
+                android:layout_height="15dp"/>
+            <TextView
+                android:text="Saldo"
+                android:textStyle="bold"
+                android:layout_marginLeft="5dp"
+                android:textColor="#000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        --><android.support.v7.widget.CardView android:id="@+id/cvVLRTOT" android:layout_marginTop="5dp" app:elevation="8dp" android:backgroundTint="#1b5e20" app:cardCornerRadius="8dp" android:layout_below="@id/linearLayout2" android:layout_width="match_parent" android:layout_height="40dp"><TextView android:id="@id/txtVLRTOTAL" android:textStyle="bold" android:textColor="#FFF" android:gravity="center" android:text="R$ 2.000,00" android:layout_width="match_parent" android:layout_height="match_parent" /></android.support.v7.widget.CardView><android.support.v7.widget.CardView android:id="@+id/cvVLRDEVOL" android:backgroundTint="#0277bd" android:layout_marginTop="5dp" app:elevation="8dp" app:cardCornerRadius="8dp" android:layout_below="@id/cvVLRTOT" android:layout_width="match_parent" android:layout_height="40dp"><TextView android:id="@+id/txtVLRDEVOL" android:textStyle="bold" android:textColor="#FFF" android:gravity="center" android:text="R$ 2.000,00" android:layout_width="match_parent" android:layout_height="match_parent" /></android.support.v7.widget.CardView><android.support.v7.widget.CardView android:id="@+id/cvCOMSSAO" android:layout_marginTop="5dp" app:elevation="8dp" android:backgroundTint="#ff5722" app:cardCornerRadius="8dp" android:layout_below="@id/cvVLRDEVOL" android:layout_width="match_parent" android:layout_height="40dp"><TextView android:id="@+id/txtCOMISSAO" android:textStyle="bold" android:textColor="#FFF" android:gravity="center" android:text="R$ 2.000,00" android:layout_width="match_parent" android:layout_height="match_parent" /></android.support.v7.widget.CardView><android.support.v7.widget.CardView android:id="@+id/cvVLRREC" android:layout_marginTop="5dp" app:elevation="8dp" android:backgroundTint="#1a237e" app:cardCornerRadius="8dp" android:layout_below="@id/cvCOMSSAO" android:layout_width="match_parent" android:layout_height="40dp"><TextView android:id="@+id/txtVLRREC" android:textStyle="bold" android:textColor="#FFF" android:gravity="center" android:text="R$ 2.000,00" android:layout_width="match_parent" android:layout_height="match_parent" /></android.support.v7.widget.CardView><android.support.v7.widget.CardView android:id="@+id/cvSALDO" android:layout_marginTop="5dp" app:elevation="8dp" android:backgroundTint="#4e342e" app:cardCornerRadius="8dp" android:layout_below="@id/cvVLRREC" android:layout_width="match_parent" android:layout_height="40dp"><TextView android:id="@+id/txtSALDO" android:textStyle="bold" android:textColor="#FFF" android:gravity="center" android:text="R$ 2.000,00" android:layout_width="match_parent" android:layout_height="match_parent" /></android.support.v7.widget.CardView></RelativeLayout></RelativeLayout>

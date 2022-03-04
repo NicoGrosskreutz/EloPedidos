@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:paddingTop="5dp"
+    android:background="@drawable/selector"
+    android:paddingBottom="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+
+    <TextView
+        android:id="@id/lblNUMERO"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="N°"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/lblNROPED"
+        android:layout_below="@id/lblNUMERO"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/lblNOMPESS"
+        android:textColor="#000"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"/>
+    <TextView
+        android:id="@id/lblVLRTOT"
+        android:layout_below="@+id/lblNOMPESS"
+        android:textColor="#000"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="-5dp"
+        android:layout_marginLeft="80dp"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"/>
+</RelativeLayout>

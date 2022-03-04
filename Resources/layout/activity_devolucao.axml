@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:id="@+id/progressBar" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true">
+        <RelativeLayout
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/relativeLayout">
+            <android.support.v7.widget.CardView
+                android:layout_width="20dp"
+                android:id="@+id/cv_radius"
+                android:layout_height="20dp"
+                card_view:cardCornerRadius="10dp"
+                card_view:cardElevation="0dp"
+                card_view:contentPadding="0dp">
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:text="Baixa / Devolução"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"
+                android:textColor="#393939"
+                android:textSize="20sp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/label1" />
+            <EditText
+                android:layout_alignRight="@id/label1"
+                android:layout_alignParentRight="true"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:textAlignment="textEnd"
+                android:textSize="10sp"
+                android:textColor="#000"
+                android:layout_marginTop="-5dp"
+                android:id="@+id/txDevice"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout1"
+                android:layout_below="@id/label1"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="120dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/txCODPESS"
+                    android:textSize="13dp"
+                    android:textAlignment="textEnd"
+                    android:fontFamily="sans-serif-condensed"
+                    android:hint="Cliente"
+                    android:inputType="number"
+                    android:digits="0123456789"
+                    android:imeOptions="actionNext"
+                    android:paddingBottom="5dp"
+                    android:layout_width="80dp"
+                    android:layout_height="35dp"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout2"
+                android:layout_below="@id/label1"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/txData"
+                    android:textSize="13dp"
+                    android:textAlignment="textEnd"
+                    android:fontFamily="sans-serif-condensed"
+                    android:hint="Data"
+                    android:enabled="false"
+                    android:inputType="number"
+                    android:digits="0123456789"
+                    android:imeOptions="actionNext"
+                    android:paddingBottom="5dp"
+                    android:layout_width="90dp"
+                    android:layout_height="35dp"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <ImageButton
+                android:id="@+id/btnSINC"
+                android:background="@mipmap/refresh"
+                android:layout_below="@id/textInputLayout1"
+                android:layout_marginTop="-30dp"
+                android:layout_marginLeft="100dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"/>
+            <TextView
+                android:id="@+id/lblNOMPESS"
+                android:textColor="#000"
+                android:layout_marginTop="5dp"
+                android:layout_width="250dp"
+                android:layout_below="@+id/textInputLayout1"
+                android:layout_height="wrap_content"/>
+            <!--
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/textInputLayout1"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+                <TextView
+                    android:id="@+id/txtTODOS"
+                    android:textColor="#000"
+                    android:textStyle="bold"
+                    android:text="Todos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"/>
+                <CheckBox
+                    android:id="@+id/ckTODOS"
+                    android:checked="false"
+                    android:layout_marginTop="-5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:background="#393939"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/lblNOMPESS"
+                android:id="@+id/header"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentLeft="true">
+
+                <TextView
+                    android:text="Data"
+                    android:padding="3dp"
+                    android:textAlignment="textStart"
+                    android:textColor="#FFF"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/txHeader1" />
+
+                <TextView
+                    android:text="Nº Pedido"
+                    android:padding="3dp"
+                    android:textAlignment="textEnd"
+                    android:textColor="#FFF"
+                    android:textSize="14sp"
+                    android:maxWidth="90dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/txHeader1" />
+                <TextView
+                    android:text="Vlr. Total"
+                    android:padding="3dp"
+                    android:textAlignment="textEnd"
+                    android:textColor="#FFF"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="25dp"
+                    android:maxWidth="110dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/txHeader2" />
+                <TextView
+                    android:text="Receber"
+                    android:padding="3dp"
+                    android:textAlignment="textEnd"
+                    android:textColor="#FFF"
+                    android:textSize="14sp"
+                    android:maxWidth="110dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/txHeader3" />
+            </LinearLayout>
+            <ListView
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:choiceMode="singleChoice"
+                android:listSelector="@drawable/selector"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_below="@id/header"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/listViewBaixa" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:baselineAligned="true"
+                android:background="#393939"
+                android:minWidth="25px"
+                android:minHeight="50px"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/listViewBaixa"
+                android:id="@+id/linearLayout"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentLeft="true">
+                <TextView
+                    android:text="Produto"
+                    android:textSize="14sp"
+                    android:textColor="#FFF"
+                    android:padding="3dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="110dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/labelHeader2" />
+                <TextView
+                    android:text="Qtd.Ped."
+                    android:textAlignment="textEnd"
+                    android:textSize="14sp"
+                    android:textColor="#FFF"
+                    android:padding="3dp"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/labelHeader3" />
+                <TextView
+                    android:text="Saldo"
+                    android:textAlignment="textEnd"
+                    android:textSize="14sp"
+                    android:textColor="#FFF"
+                    android:padding="3dp"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/labelHeader4" />
+                <TextView
+                    android:text="Qtd."
+                    android:textAlignment="textEnd"
+                    android:textSize="14sp"
+                    android:textColor="#FFF"
+                    android:padding="3dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/labelHeader5" />
+            </LinearLayout>
+            <ListView
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="wrap_content"
+                android:choiceMode="singleChoice"
+                android:listSelector="@drawable/selector"
+                android:layout_height="350px"
+                android:layout_marginBottom="5dp"
+                android:layout_below="@id/linearLayout"
+                android:id="@+id/listView" />
+            <TextView
+                android:id="@+id/txDSCPROD"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_alignParentLeft="true"
+                android:minWidth="100dp"
+                android:maxWidth="200dp"
+                android:layout_marginTop="25dp"
+                android:layout_below="@id/listView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout3"
+                android:layout_below="@id/listView"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="80dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/txQTDPROD"
+                    android:textSize="13dp"
+                    android:textAlignment="textEnd"
+                    android:fontFamily="sans-serif-condensed"
+                    android:hint="Qtde. Devol."
+                    android:inputType="number"
+                    android:digits="0123456789"
+                    android:imeOptions="actionNext"
+                    android:paddingBottom="5dp"
+                    android:layout_width="90dp"
+                    android:layout_height="35dp"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:text="Gravar"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="-5dp"
+                android:padding="0dp"
+                android:layout_below="@id/listView"
+                android:layout_width="70dp"
+                android:id="@+id/btnGravar"
+                android:layout_height="70dp"/>
+            <TextView
+                android:text="SALDO A RECEBER DO CLIENTE"
+                android:paddingRight="3dp"
+                android:textSize="14sp"
+                android:textAlignment="textEnd"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textInputLayout3"
+                android:id="@+id/lblSLDREC"
+                android:layout_alignParentRight="true" />
+            <RelativeLayout
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:paddingRight="5dp"
+                android:gravity="right"
+                android:layout_marginBottom="5dp"
+                android:background="#0277bd"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_below="@+id/lblSLDREC"
+                android:id="@+id/linearLayout3"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentLeft="true">
+                
+                <TextView
+                    android:text="R$ 0,00"
+                    android:padding="5dp"
+                    android:textAlignment="textEnd"
+                    android:textSize="16sp"
+                    android:textColor="#FFF"
+                    android:textStyle="bold"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lbSaldo" />
+                <TextView
+                    android:padding="5dp"
+                    android:textAlignment="textStart"
+                    android:textSize="16sp"
+                    android:textColor="#FFF"
+                    android:textStyle="bold"
+                    android:layout_marginRight="150dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@id/lblPEDIDO" />
+            </RelativeLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout4"
+                android:layout_below="@id/linearLayout3"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/txtDATARET"
+                    android:textSize="13dp"
+                    android:textAlignment="textEnd"
+                    android:fontFamily="sans-serif-condensed"
+                    android:hint="Data do Retorno"
+                    android:inputType="number"
+                    android:digits="0123456789"
+                    android:imeOptions="actionNext"
+                    android:paddingBottom="5dp"
+                    android:layout_width="120dp"
+                    android:layout_height="35dp"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout5"
+                android:layout_below="@+id/textInputLayout4"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/txVLRBAIXA"
+                    android:textSize="13dp"
+                    android:textAlignment="textEnd"
+                    android:fontFamily="sans-serif-condensed"
+                    android:hint="Valor Recebido"
+                    android:inputType="number"
+                    android:digits="0123456789,"
+                    android:imeOptions="actionDone"
+                    android:paddingBottom="5dp"
+                    android:layout_width="120dp"
+                    android:layout_height="35dp"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/lblNROPED"
+                android:layout_below="@id/linearLayout3"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/lblVLRREC"
+                android:layout_below="@id/lblNROPED"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:minWidth="25px"
+                android:minHeight="50px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textInputLayout5"
+                android:id="@+id/linearLayout1"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentLeft="true">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="2dp"
+                    android:id="@id/btnSalvar"
+                    android:text="Salvar"/>
+                <Button
+                    android:text="Imprimir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="2dp"
+                    android:id="@id/btnImprimir" />
+                <Button
+                    android:text="Limpar"
+                    android:layout_width="wrap_content"
+                    android:layout_margin="2dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/btnLimpar" />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

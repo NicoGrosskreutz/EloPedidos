@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.1.101" package="EloPedidos.EloPedidos" android:installLocation="auto" android:versionCode="1">
+	<uses-sdk android:minSdkVersion="22" android:targetSdkVersion="28" />
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+	<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+	<uses-permission android:name="android.permission.BLUETOOTH" />
+	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+	<uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+	<uses-permission android:name="android.permission.SET_ORIENTATION" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.FLASHLIGHT" />
+	<uses-permission android:name="android.permission.SEND_SMS" />
+	<application android:allowBackup="true" android:label="@string/app_name" android:roundIcon="@mipmap/logo" android:supportsRtl="true" android:theme="@style/AppTheme" android:icon="@mipmap/logo">
+		<receiver android:name="Broadcast.cancelNotification">
+			<intent-filter>
+				<action android:name="closeNotification" />
+			</intent-filter>
+		</receiver>
+		<service android:name=".LocationService" />
+		<service android:name=".GeolocatorService" />
+		<service android:name=".GeolocatorJob" android:permission="android.permission.BIND_JOB_SERVICE" android:exported="true" label="GJob" />
+		<service android:name=".GeolocatorJobIntentService" android:permission="android.permission.BIND_JOB_SERVICE" exported="true" />
+		<provider android:name="android.support.v4.content.FileProvider" android:authorities="${applicationId}.EloPedidos.EloPedidos.provider" android:exported="false" android:grantUriPermissions="true">
+			<meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/provider_paths" />
+		</provider>
+	</application>
+</manifest>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="colorPrimary">#2c3e50</color>
+  <color name="colorPrimaryDark">#1B3147</color>
+  <color name="colorAccent">#3498db</color>
+
+  <color name="blue">#FF005a9c</color>
+  <color name="lightBlue">#ff6691c4</color>
+  <color name="lighterBlue">#ffcdd8ec</color>
+  <color name="controlBackground">#ffffffff</color>
+
+  <color name="selectorVerde">#63E527</color>
+  <color name="white">#FFFFFF</color>
+  <color name="selectorGray">#95999B</color>
+</resources>

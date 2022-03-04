@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="Relatório das devoluções"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:id="@+id/header"/>
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        android:padding="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@id/header"
+        android:id="@+id/relativerLayout1">
+    </RelativeLayout>
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:padding="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="40dp"
+        android:id="@+id/relativerLayout2">
+
+        <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout5"
+                android:layout_below="@+id/header"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/txPesquisa"
+                    android:textSize="13dp"
+                    android:textAlignment="textStart"
+                    android:fontFamily="sans-serif-condensed"
+                    android:hint="Produto"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"
+                    android:paddingBottom="5dp"
+                    android:layout_width="250dp"
+                    android:layout_height="45dp"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout1"
+                android:layout_below="@+id/header"
+                android:layout_marginLeft="275dp"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/txCLIENTE"
+                    android:textSize="13dp"
+                    android:textAlignment="textStart"
+                    android:fontFamily="sans-serif-condensed"
+                    android:hint="Cliente"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"
+                    android:paddingBottom="5dp"
+                    android:layout_width="250dp"
+                    android:layout_height="45dp"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout2"
+                android:layout_below="@+id/header"
+                android:layout_marginLeft="275dp"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/txNROPEDID"
+                    android:textSize="13dp"
+                    android:textAlignment="textEnd"
+                    android:fontFamily="sans-serif-condensed"
+                    android:hint="Pedido"
+                    android:inputType="number"
+                    android:imeOptions="actionDone"
+                    android:paddingBottom="5dp"
+                    android:layout_width="80dp"
+                    android:layout_height="45dp"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:baselineAligned="true"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:background="#393939"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="110dp"
+        android:id="@+id/linearLayout2">
+        <TextView
+            android:text="N.Ped"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="#FFF"
+            android:padding="6dp"
+            android:layout_marginLeft="6dp"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/label2" />
+        <TextView
+            android:text="Cliente"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="#FFF"
+            android:padding="6dp"
+            android:layout_marginLeft="60dp"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/label3" />
+        <TextView
+            android:text="Cod."
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="#FFF"
+            android:padding="6dp"
+            android:layout_marginLeft="260dp"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/label4" />
+        <TextView
+            android:text="Produtos"
+            android:textSize="13sp"
+            android:singleLine="true"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:padding="6dp"
+            android:layout_marginLeft="320dp"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/label5" />
+        <TextView
+            android:text="Qtd. devol."
+            android:textSize="13sp"
+            android:textAlignment="textEnd"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:padding="6dp"
+            android:layout_width="100dp"
+            android:layout_marginRight="6dp"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content"
+            android:id="@+id/label6" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_below="@id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginBottom="5dp"
+            android:id="@+id/listView"/>
+    </RelativeLayout>
+</RelativeLayout>

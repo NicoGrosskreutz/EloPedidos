@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:fillViewport="false">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status: "
+            android:id="@+id/txtStatusNFe" />
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Data:"
+                android:id="@+id/textView4"
+                android:layout_weight="1.15" />
+
+            <TextView
+                android:layout_width="82dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Nº NFe"
+                android:id="@+id/textView3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+
+            <EditText
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtDataPedido"
+                android:inputType="date"
+                android:nextFocusDown="@+id/txtNumeroPedido"
+                android:selectAllOnFocus="true"
+                android:maxLength="10"
+                android:layout_marginRight="140dp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtNumeroPedido"
+                android:inputType="number"
+                android:nextFocusDown="@+id/txtCodClientePedido"
+                android:selectAllOnFocus="true"
+                android:maxLength="7"
+                android:layout_gravity="top"
+                android:gravity="right" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Cliente:"
+                android:id="@+id/textView5"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+
+            <EditText
+                android:layout_width="73dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtCodClientePedido"
+                android:inputType="number"
+                android:nextFocusDown="@+id/txtCodProdutoPedido"
+                android:selectAllOnFocus="true"
+                android:gravity="right" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtDscClientePedido"
+                android:enabled="false"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Produtos:"
+                android:id="@+id/textView6" />
+
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:id="@+id/listViewProdutosPedido" />
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Valor total: R$ 0,00"
+                android:id="@+id/txtValorTotalPedido"
+                android:paddingTop="10dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Produto:"
+                android:id="@+id/textView8"
+                android:layout_weight="0.10" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Complemento:"
+                android:id="@+id/textView9" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_width="73dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/txtCodProdutoPedido"
+                android:nextFocusDown="@+id/txtComplementoPedido"
+                android:selectAllOnFocus="true"
+                android:maxLength="5"
+                android:gravity="right" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtComplementoPedido"
+                android:inputType="text"
+                android:nextFocusDown="@+id/txtQtdPcPedido"
+                android:selectAllOnFocus="true" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Descrição do produto..."
+            android:id="@+id/txtDscProdutoPedido" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="54dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="PC/CX"
+                android:id="@+id/textView10" />
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Qtde"
+                android:id="@+id/textView11" />
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Vlr Unit."
+                android:id="@+id/textView20" />
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Desconto"
+                android:id="@+id/textView12" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Valor total"
+                android:id="@+id/textView13"
+                android:gravity="right" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <EditText
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/txtQtdPcPedido"
+                android:nextFocusDown="@+id/txtQtdPedido"
+                android:selectAllOnFocus="true"
+                android:maxLength="7"
+                android:gravity="right" />
+
+            <EditText
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/txtQtdPedido"
+                android:nextFocusDown="@+id/txtVlrUnitPedido"
+                android:digits="0123456789,"
+                android:singleLine="true"
+                android:selectAllOnFocus="true"
+                android:maxLength="7"
+                android:gravity="right" />
+
+            <EditText
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/txtVlrUnitPedido"
+                android:nextFocusDown="@+id/txtDescontoPedido"
+                android:digits="0123456789,"
+                android:singleLine="true"
+                android:selectAllOnFocus="true"
+                android:maxLength="7"
+                android:gravity="right" />
+
+            <EditText
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/txtDescontoPedido"
+                android:nextFocusDown="@+id/btnSalvarProdutoPedido"
+                android:digits="0123456789,"
+                android:singleLine="true"
+                android:selectAllOnFocus="true"
+                android:maxLength="7"
+                android:gravity="right" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/txtValTotProdutoPedido"
+                android:layout_weight="0.97"
+                android:enabled="false"
+                android:gravity="right" />
+
+        </LinearLayout>
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:weightSum="1">
+
+        <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Salvar"
+                android:id="@+id/btnSalvarProdutoPedido"
+                android:focusableInTouchMode="true"/>
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Deletar"
+                android:id="@+id/btnDeletarProdutoPedido" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Prazo de pagamento:"
+            android:id="@+id/textView14" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtPrazoPagamentoPedido"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:digits="0123456789/"
+            android:inputType="date" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Observação:"
+        android:id="@+id/textView7" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtObsPedido"
+        android:nextFocusDown="@+id/btnSalvarPedido"
+        android:singleLine="true"
+        android:selectAllOnFocus="true"
+        android:inputType="text" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Imprimir"
+            android:id="@+id/btnImprimirPedido"
+            android:layout_gravity="center_vertical"
+            android:focusableInTouchMode="false" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deletar"
+            android:id="@+id/btnDeletarPedido"
+            android:focusableInTouchMode="false" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Limpar"
+            android:id="@+id/btnLimparPedido" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Salvar"
+            android:id="@+id/btnSalvarPedido"
+            android:focusableInTouchMode="true"/>
+    </LinearLayout>
+
+</LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+	<RelativeLayout
+		android:orientation="horizontal"
+		android:baselineAligned="true"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentRight="true"
+		android:id="@+id/linearLayout" >
+		<TextView
+			android:textSize="13sp"
+			android:textColor="#000"
+			android:padding="6dp"
+			android:textAlignment="textEnd"
+			android:layout_marginLeft="3dp"
+			android:layout_width="40dp"
+			android:layout_height="wrap_content"
+			android:id="@+id/label2" />
+		<TextView
+			android:textSize="13sp"
+			android:singleLine="true"
+			android:textColor="#000"
+			android:padding="6dp"
+			android:layout_marginLeft="57dp"
+			android:layout_width="200dp"
+			android:layout_height="wrap_content"
+			android:id="@+id/label3" />
+		<TextView
+			android:textSize="13sp"
+			android:textAlignment="textEnd"
+			android:textColor="#000"
+			android:padding="6dp"
+			android:layout_width="100dp"
+			android:layout_marginRight="4dp"
+			android:layout_alignParentRight="true"
+			android:layout_height="wrap_content"
+			android:id="@+id/label4" />
+	</RelativeLayout>
+
+</RelativeLayout>
+

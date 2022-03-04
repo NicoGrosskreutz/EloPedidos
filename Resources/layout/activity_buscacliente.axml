@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="Pesquisa Cliente"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:layout_marginTop="3dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:id="@+id/label1" />
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_below="@id/textInputLayout1"
+        android:id="@+id/ckMUNIC"
+        android:layout_alignParentLeft="true" />
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_below="@id/ckMUNIC"
+        android:id="@+id/ckINDINAT"
+        android:layout_alignParentLeft="true" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayout1"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/txPesquisa"
+            android:textSize="15dp"
+            android:textAlignment="textStart"
+            android:fontFamily="sans-serif-condensed"
+            android:hint="Cliente"
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            android:paddingBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <TextView
+        android:textSize="13sp"
+        android:textColor="#000"
+        android:layout_marginLeft="30dp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txMUNIC"
+        android:layout_marginTop="9dp"
+        android:layout_below="@id/textInputLayout1" />
+
+    <TextView
+        android:text="Inativos"
+        android:textSize="13sp"
+        android:textColor="#000"
+        android:layout_marginLeft="30dp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txINDINAT"
+        android:layout_marginTop="12dp"
+        android:layout_below="@id/txMUNIC" />
+
+    <ListView
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ckINDINAT"
+        android:id="@+id/listView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

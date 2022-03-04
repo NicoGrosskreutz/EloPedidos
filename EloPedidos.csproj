@@ -1,0 +1,583 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1DFB6D7A-EBCE-453D-A05B-BB37C0CF4A55}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TemplateGuid>{122416d6-6b49-4ee2-a1e8-b825f31c79fe}</TemplateGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EloPedidos</RootNamespace>
+    <AssemblyName>EloPedidos</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <AndroidApplication>True</AndroidApplication>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
+    <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
+    <AndroidKeyStore>false</AndroidKeyStore>
+    <AndroidSigningKeyStore>C:\Users\Eloisio\AppData\Local\Xamarin\Mono for Android\Keystore\EloSoftware\EloSoftware.keystore</AndroidSigningKeyStore>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <BundleAssemblies>false</BundleAssemblies>
+    <AndroidSupportedAbis>
+    </AndroidSupportedAbis>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <MandroidI18n />
+    <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
+    <EnableProguard>false</EnableProguard>
+    <AndroidTlsProvider>btls</AndroidTlsProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>3</WarningLevel>
+    <AndroidManagedSymbols>true</AndroidManagedSymbols>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <BundleAssemblies>false</BundleAssemblies>
+    <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
+    <AndroidSupportedAbis>armeabi-v7a;x86;x86_64;arm64-v8a</AndroidSupportedAbis>
+    <EnableProguard>false</EnableProguard>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <BundleAssemblies>false</BundleAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <WarningLevel>3</WarningLevel>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Mono.Android" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Adapter\AdapterBuscarCliente.cs" />
+    <Compile Include="Adapter\AdapterBuscarProduto.cs" />
+    <Compile Include="Adapter\AdapterItensDevolucao.cs" />
+    <Compile Include="Adapter\AdapterItensPedido.cs" />
+    <Compile Include="Adapter\AdapterBuscarPedidos.cs" />
+    <Compile Include="Adapter\AdapterListaBaixas.cs" />
+    <Compile Include="Adapter\AdapterListaPedidos.cs" />
+    <Compile Include="Adapter\AgendaAdapter.cs" />
+    <Compile Include="Adapter\BaixaPedidoAdapter.cs" />
+    <Compile Include="Adapter\DevolucaoItensAdapter.cs" />
+    <Compile Include="Adapter\EmissaoRelatorioAdapter.cs" />
+    <Compile Include="Adapter\EstoqueAdapter.cs" />
+    <Compile Include="Adapter\RelatorioBaixasAdapter.cs" />
+    <Compile Include="Adapter\RelatorioDevolucoesAdapter.cs" />
+    <Compile Include="Adapter\RelatorioRomaneioAdapter.cs" />
+    <Compile Include="Broadcast\cancelNotification.cs" />
+    <Compile Include="Controllers\AgendaController.cs" />
+    <Compile Include="Controllers\AparelhoController.cs" />
+    <Compile Include="Controllers\BaixasPedidoController.cs" />
+    <Compile Include="Controllers\BuscarPedidoController.cs" />
+    <Compile Include="Controllers\ConfigController.cs" />
+    <Compile Include="Controllers\DevolucaoItemController.cs" />
+    <Compile Include="Controllers\EmpresaController.cs" />
+    <Compile Include="Controllers\RomaneioController.cs" />
+    <Compile Include="Controllers\FTPController.cs" />
+    <Compile Include="Controllers\GeolocatorController.cs" />
+    <Compile Include="Controllers\ItemPedidoController.cs" />
+    <Compile Include="Controllers\MunicipioController.cs" />
+    <Compile Include="Controllers\NetworkController.cs" />
+    <Compile Include="Controllers\OperadorController.cs" />
+    <Compile Include="Controllers\PedidoController.cs" />
+    <Compile Include="Controllers\PessoaController.cs" />
+    <Compile Include="Controllers\PrinterController.cs" />
+    <Compile Include="Controllers\ProdutoController.cs" />
+    <Compile Include="Controllers\SequenciaController.cs" />
+    <Compile Include="Controllers\VencimentoController.cs" />
+    <Compile Include="Controllers\VendedorController.cs" />
+    <Compile Include="MainActivity.cs" />
+    <Compile Include="Models\Agenda.cs" />
+    <Compile Include="Models\Aparelho.cs" />
+    <Compile Include="Models\BaixasPedido.cs" />
+    <Compile Include="Models\BaixasPedidoAdapterCls.cs" />
+    <Compile Include="Models\Config.cs" />
+    <Compile Include="Models\DevolucaoItem.cs" />
+    <Compile Include="Models\DevolucaoItensAdapterCls.cs" />
+    <Compile Include="Models\DevolucoesAdapterCls.cs" />
+    <Compile Include="Models\DNS.cs" />
+    <Compile Include="Models\EmissaoAdapterCls.cs" />
+    <Compile Include="Models\Empresa.cs" />
+    <Compile Include="Models\EstoqueAdapterCls.cs" />
+    <Compile Include="Models\Estoque.cs" />
+    <Compile Include="Models\ItemPedido.cs" />
+    <Compile Include="Models\Pagamento.cs" />
+    <Compile Include="Models\Municipio.cs" />
+    <Compile Include="Models\Operador.cs" />
+    <Compile Include="Models\Pedido.cs" />
+    <Compile Include="Models\Pessoa.cs" />
+    <Compile Include="Models\Produto.cs" />
+    <Compile Include="Models\Romaneio.cs" />
+    <Compile Include="Models\RomaneioItem.cs" />
+    <Compile Include="Models\Sequencia.cs" />
+    <Compile Include="Models\Vencimento.cs" />
+    <Compile Include="Models\Vendedor.cs" />
+    <Compile Include="Persistence\BaixasPedidoDAO.cs" />
+    <Compile Include="Persistence\ConfigDAO.cs" />
+    <Compile Include="Persistence\Database.cs" />
+    <Compile Include="Persistence\DevolucaoItemDAO.cs" />
+    <Compile Include="Persistence\EmpresaDAO.cs" />
+    <Compile Include="Persistence\GeolocatorDAO.cs" />
+    <Compile Include="Persistence\ICrud.cs" />
+    <Compile Include="Persistence\ItemPedidoDAO.cs" />
+    <Compile Include="Persistence\MunicipioDAO.cs" />
+    <Compile Include="Persistence\OperadorDAO.cs" />
+    <Compile Include="Persistence\PedidoDAO.cs" />
+    <Compile Include="Persistence\PessoaDAO.cs" />
+    <Compile Include="Persistence\ProdutoDAO.cs" />
+    <Compile Include="Persistence\SequenciaDAO.cs" />
+    <Compile Include="Persistence\VencimentoDAO.cs" />
+    <Compile Include="Persistence\VendedorDAO.cs" />
+    <Compile Include="Provider\FileProviderClass.cs" />
+    <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\GeolocatorService.cs" />
+    <Compile Include="Models\Geolocator.cs" />
+    <Compile Include="Services\LocationService.cs" />
+    <Compile Include="Utils\DialogFactory.cs" />
+    <Compile Include="Utils\Ext.cs" />
+    <Compile Include="Utils\Format.cs" />
+    <Compile Include="Utils\Localization.cs" />
+    <Compile Include="Utils\PdfCreator.cs" />
+    <Compile Include="Utils\RemoveMasks.cs" />
+    <Compile Include="Utils\Sincronizador.cs" />
+    <Compile Include="Utils\SisLog.cs" />
+    <Compile Include="Utils\Validations.cs" />
+    <Compile Include="Views\AgendaView.cs" />
+    <Compile Include="Views\BuscaClienteView.cs" />
+    <Compile Include="Views\BuscaMunicipioView.cs" />
+    <Compile Include="Views\BuscarClientesBaixaView.cs" />
+    <Compile Include="Views\BuscarPedidoDevolucao.cs" />
+    <Compile Include="Views\BuscarPedidoView.cs" />
+    <Compile Include="Views\BuscarProdutoView.cs" />
+    <Compile Include="Views\ClienteView.cs" />
+    <Compile Include="Views\ConfigView.cs" />
+    <Compile Include="Views\DevolucaoPedidoViewOld.cs" />
+    <Compile Include="Views\DevolucaoPedidoView.cs" />
+    <Compile Include="Views\EstoqueView.cs" />
+    <Compile Include="Views\gMapView.cs" />
+    <Compile Include="Views\LoginView.cs" />
+    <Compile Include="Views\PedidoView.cs" />
+    <Compile Include="Views\RelatorioBaixasView.cs" />
+    <Compile Include="Views\RelatorioDevolucoesView.cs" />
+    <Compile Include="Views\RelatorioEmissaoView.cs" />
+    <Compile Include="Views\RelatorioRomaneioView.cs" />
+    <Compile Include="Views\ResumoPedidoView.cs" />
+    <Compile Include="Views\VendedorView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Properties\AndroidManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Assets\AboutAssets.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_pedido.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\values\colors.xml" />
+    <AndroidResource Include="Resources\values\ic_launcher_background.xml" />
+    <AndroidResource Include="Resources\values\strings.xml" />
+    <AndroidResource Include="Resources\values\styles.xml" />
+    <AndroidResource Include="Resources\mipmap-anydpi-v26\ic_launcher.xml" />
+    <AndroidResource Include="Resources\mipmap-anydpi-v26\ic_launcher_round.xml" />
+    <AndroidResource Include="Resources\mipmap-hdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\ic_launcher_foreground.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\ic_launcher_round.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_launcher_foreground.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_launcher_round.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_launcher_foreground.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_launcher_round.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_launcher_foreground.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_launcher_round.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_foreground.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_round.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DocsBrStandard">
+      <Version>2.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="FluentFTP">
+      <Version>34.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="itext7">
+      <Version>7.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="Mapsui.Android">
+      <Version>3.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microcharts">
+      <Version>0.7.1</Version>
+    </PackageReference>
+    <PackageReference Include="MongoDB.Driver">
+      <Version>2.13.2</Version>
+    </PackageReference>
+    <PackageReference Include="PCLExt.FileStorage">
+      <Version>1.4.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Plugin.CurrentActivity">
+      <Version>2.1.0.4</Version>
+    </PackageReference>
+    <PackageReference Include="sqlite-net-pcl">
+      <Version>1.6.292</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugin.DeviceInfo">
+      <Version>4.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugin.Geolocator">
+      <Version>4.5.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Android.Arch.Work.Runtime">
+      <Version>1.0.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />
+    <PackageReference Include="Xamarin.Android.Support.v4">
+      <Version>28.0.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat">
+      <Version>28.0.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Essentials">
+      <Version>1.6.1</Version>
+    </PackageReference>
+    <PackageReference Include="ZXing.Net.Mobile">
+      <Version>1.4.7</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_config.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\main_menu.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_main.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-hdpi\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_login.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_buscacliente.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\simplelist.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_buscamunicipio.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_buscarproduto.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_buscapedido.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-hdpi\refresh1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout-normal-port\activity_pedido2.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\simpledropdown.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\adapter_pedidos.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_devolucao.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\adapter_devolucao.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\dialog_senha.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_relatorioromaneio.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\adapter_romaneio.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_relatorioEmissao.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\adapter_emissoes.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_relatoriodevolucoes.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\adapter_relatoriodevol.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_agenda.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\adapter_agenda.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-hdpi\lupa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-hdpi\download_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\adapter_estoque.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_estoque.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-hdpi\filter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\dialog_estoque.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-hdpi\barcode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-hdpi\wpp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\buttonLogout.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-hdpi\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_cadastrarCliente.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\color\control_switch_color_selector.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\control_switch_background_border.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\control_switch_background_selector.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\control_switch_background_selector_middle.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_relatorioBaixas.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_resumoPedido.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\adapter_relatoriobaixa.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\raw\beep.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_teste.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\selector.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\xml\provider_paths.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Adapter_clientes.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Adapter_BuscarProd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Activity_Vendedores.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\buttonRotas.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_map.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Adapter_itensPedido.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\adapter_buscarPedidos.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-hdpi\share.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-hdpi\historyOrder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-hdpi\client.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-hdpi\inventory.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-hdpi\schedule.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\menuItemSelector.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\dialog_remarcarVencimento.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\adapter_lista_pedidos.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\dialog_brinde.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+    Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+  -->
+</Project>

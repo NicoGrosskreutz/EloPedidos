@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp">
+
+    <android.support.v7.widget.CardView
+        app:cardElevation="8dp"
+        app:cardCornerRadius="8dp"
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/txtNOMPROD"
+            android:inputType="text"
+            android:textSize="15dp"
+            android:hint="NOME DO PRODUTO"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        app:cardElevation="8dp"
+        app:cardCornerRadius="8dp"
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/txtBARCODE"
+            android:inputType="number"
+            android:textSize="15dp"
+            android:hint="CODIGO DE BARRAS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </android.support.v7.widget.CardView>
+
+    <!---
+    <android.support.v7.widget.CardView
+        app:cardElevation="8dp"
+        app:cardCornerRadius="8dp"
+        android:layout_margin="5dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp">
+
+        <TextView
+            android:text="Vendido"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnMenos"
+                android:text="-"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
+            <EditText
+                android:id="@+id/txtQTD"
+                android:text="0"
+                android:lines="1"
+                android:imeOptions="actionNext"
+                android:textAlignment="center"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/btnMais"
+                android:text="+"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        app:cardElevation="8dp"
+        app:cardCornerRadius="8dp"
+        android:layout_margin="5dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp">
+
+        <TextView
+            android:text="Devolvido"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnMenosdevol"
+                android:text="-"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
+            <EditText
+                android:id="@+id/txtQTDdevol"
+                android:text="0"
+                android:lines="1"
+                android:imeOptions="actionNext"
+                android:textAlignment="center"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/btnMaisdevol"
+                android:text="+"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        app:cardElevation="8dp"
+        app:cardCornerRadius="8dp"
+        android:layout_margin="5dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp">
+
+        <TextView
+            android:text="Brinde"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnMenosbrinde"
+                android:text="-"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
+            <EditText
+                android:id="@+id/txtQTDbrinde"
+                android:text="0"
+                android:lines="1"
+                android:imeOptions="actionDone"
+                android:textAlignment="center"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/btnMaisbrinde"
+                android:text="+"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    -->
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <android.support.v7.widget.CardView
+                app:cardElevation="8dp"
+                app:cardCornerRadius="8dp"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Quantidade Total:"
+                    android:gravity="center_horizontal"
+                    android:textColor="#000"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/lblQTDPRO"
+                        android:gravity="center_horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <!---
+            <android.support.v7.widget.CardView
+                app:cardElevation="8dp"
+                android:layout_alignParentRight="true"
+                app:cardCornerRadius="8dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Quantidade Atual"
+                    android:textColor="#000"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/lblQTDATPRO"
+                        android:gravity="center_horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            -->
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>
