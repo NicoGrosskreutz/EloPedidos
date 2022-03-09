@@ -30,7 +30,10 @@ namespace EloPedidos.Controllers
         {
             var conn = (ConnectivityManager) context.GetSystemService(Context.ConnectivityService);
             var info = conn.ActiveNetworkInfo;
-            return info.IsConnected;
+            if (info != null && info.IsConnected)
+                return true;
+            else
+                return false;
         }
     }
 }

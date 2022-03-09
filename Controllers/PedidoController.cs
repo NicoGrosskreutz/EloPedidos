@@ -134,7 +134,7 @@ namespace EloPedidos.Controllers
 			return pedido;
 		}
 
-		public double totalReceberCliente(long pCG_PESSOA_ID, out string[] _Pedidos)
+		public double totalReceberCliente(long ID_PESS, out string[] _Pedidos)
 		{
 			double valor = 0;
 			PedidoController pController = new PedidoController();
@@ -143,7 +143,7 @@ namespace EloPedidos.Controllers
 
 			try
 			{
-				List<Pedido> pedidos = pController.FindByCG_PESSOA_ID(pCG_PESSOA_ID);
+				List<Pedido> pedidos = pController.FindBy_ID_PESSOA(ID_PESS);
 				if (pedidos.Count > 0)
 				{
 					pedidos.ForEach(p =>
@@ -727,12 +727,15 @@ namespace EloPedidos.Controllers
 								var item = new DevolucaoItemController().FindById(i.FT_PEDIDO_ITEM_DEVOLUCAO_ID.Value);
 								if (item != null && !item.INDSINC)
 								{
-									var codprod = new DevolucaoItemController().FindById(i.FT_PEDIDO_ITEM_DEVOLUCAO_ID.Value).CODPROD;
-									///Devoluções
-									builder.Append(codprod)
-												.Append(";")
-												.Append(i.QTDDEVOL)
-												.Append("#");
+									if (i.QTDDEVOL > 0)
+									{
+										var codprod = new DevolucaoItemController().FindById(i.FT_PEDIDO_ITEM_DEVOLUCAO_ID.Value).CODPROD;
+										///Devoluções
+										builder.Append(codprod)
+													.Append(";")
+													.Append(i.QTDDEVOL)
+													.Append("#");
+									}
 								}
 							});
 						else
@@ -1230,7 +1233,7 @@ namespace EloPedidos.Controllers
 			b.Append($"DATA DO RETORNO: {pedido.DATERET.ToString("dd/MM/yyyy")}\n");
 			b.Append("\n");
 
-			double toReceive = this.totalReceberCliente(pedido.CG_PESSOA_ID.Value, out string[] _Pedidos);
+			double toReceive = this.totalReceberCliente(pedido.ID_PESSOA.Value, out string[] _Pedidos);
 			if (toReceive > 0)
 			{
 				b.AppendLine($"SALDO DEVEDOR: {toReceive.ToString("C2")}");

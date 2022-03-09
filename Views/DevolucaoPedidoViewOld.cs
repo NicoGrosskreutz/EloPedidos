@@ -1528,7 +1528,7 @@ namespace EloPedidos.Views
                         }
 
                         double saldo = 0;
-                        saldo = new BaixasPedidoController().totalReceberCliente(cliente.CG_PESSOA_ID.Value, out string[] pd);
+                        saldo = new BaixasPedidoController().totalReceberCliente(cliente.ID.Value, out string[] pd);
 
                         if (pedidoAlterado != null && pedidoAlterado.SITPEDID != (short)Pedido.SitPedido.Aberto)
                         {

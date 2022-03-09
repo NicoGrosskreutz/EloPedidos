@@ -40,108 +40,120 @@ namespace EloPedidos.Controllers
 
             return DAO.Save(sequencia);
         }
-
-        public bool ComSocket(string request, string host, int port)
+        /// <summary>
+        /// PARAMETRO "HasNotSinc" - USADO TRUE CASO EXISTA PEDIDOS NÃO SINCRONIZADOS
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="host"></param>
+        /// <param name="port"></param>
+        /// <param name="HasNotSinc"></param>
+        /// <returns></returns>
+        public bool ComSocket(string request, string host, int port, bool HasNotSinc = false)
         {
             bool aux = false;
 
-            Thread t = new Thread(() =>
+            if (!HasNotSinc)
             {
-
-                TcpClient client = null;
-                NetworkStream netStream = null;
-
-                try
+                Thread t = new Thread(() =>
                 {
-                    client = new TcpClient();
-                    client.Connect(host, port);
 
-                    netStream = client.GetStream();
+                    TcpClient client = null;
+                    NetworkStream netStream = null;
 
-                    byte[] msg = request.ToUTF8(true);
-                    netStream.Write(msg, 0, msg.Length);
-
-                    if (netStream.CanRead)
+                    try
                     {
-                        byte[] bytesMsg = new byte[client.ReceiveBufferSize];
-                        netStream.Read(bytesMsg, 0, client.ReceiveBufferSize);
-                        string receiveMsg = bytesMsg.UTF7ToString();
+                        client = new TcpClient();
+                        client.Connect(host, port);
 
-                        if (receiveMsg.Contains("\0\0"))
-                            receiveMsg = receiveMsg.Split("\0\0")[0];
+                        netStream = client.GetStream();
 
-                        receiveMsg = receiveMsg.Replace("CARGAVENDESEQ@@", "").Replace("@@FIMVSE", "");
+                        byte[] msg = request.ToUTF8(true);
+                        netStream.Write(msg, 0, msg.Length);
 
-                        if (!receiveMsg.Contains("ERRO"))
+                        if (netStream.CanRead)
                         {
+                            byte[] bytesMsg = new byte[client.ReceiveBufferSize];
+                            netStream.Read(bytesMsg, 0, client.ReceiveBufferSize);
+                            string receiveMsg = bytesMsg.UTF7ToString();
 
-                            string[] data = receiveMsg.Split(';');
-                            if (!data[0].Contains("FIMVSE"))
+                            if (receiveMsg.Contains("\0\0"))
+                                receiveMsg = receiveMsg.Split("\0\0")[0];
+
+                            receiveMsg = receiveMsg.Replace("CARGAVENDESEQ@@", "").Replace("@@FIMVSE", "");
+
+                            if (!receiveMsg.Contains("ERRO"))
                             {
-                                Sequencia s = new Sequencia
+
+                                string[] data = receiveMsg.Split(';');
+                                if (!data[0].Contains("FIMVSE"))
                                 {
-                                    CG_VENDEDOR_SEQ_PEDIDO_ID = data[0].ToLong(),
-                                    CG_VENDEDOR_ID = data[1].ToLong(),
-                                    NROPEDIN = data[2].ToLong(),
-                                    NROPEDFI = data[3].ToLong(),
-                                    NROPEDAT = data[4].ToLong(),
-                                    DTHULTAT = DateTime.Parse(data[5]),
-                                    USRULTAT = data[6]
-                                };
+                                    Sequencia s = new Sequencia
+                                    {
+                                        CG_VENDEDOR_SEQ_PEDIDO_ID = data[0].ToLong(),
+                                        CG_VENDEDOR_ID = data[1].ToLong(),
+                                        NROPEDIN = data[2].ToLong(),
+                                        NROPEDFI = data[3].ToLong(),
+                                        NROPEDAT = data[4].ToLong(),
+                                        DTHULTAT = DateTime.Parse(data[5]),
+                                        USRULTAT = data[6]
+                                    };
 
-                                //if (s.NROPEDAT == 0)
+                                    //if (s.NROPEDAT == 0)
 
-                                //    goto Error1;
-                                //if ((seqAux = Sequencia) != null)
-                                //    if (seqAux.NROPEDAT != s.NROPEDAT && seqAux.NROPEDIN == s.NROPEDIN)
-                                //        goto Error2;
+                                    //    goto Error1;
+                                    //if ((seqAux = Sequencia) != null)
+                                    //    if (seqAux.NROPEDAT != s.NROPEDAT && seqAux.NROPEDIN == s.NROPEDIN)
+                                    //        goto Error2;
 
-                                aux = this.Save(s);
+                                    aux = this.Save(s);
+                                    goto Finish;
+                                }
+                                else
+                                    aux = true;
                                 goto Finish;
                             }
                             else
+                                aux = false;
+
+                            //Error1:
+                            //{
+                            //    string message = "CARGAVENDESEQ@@NAO FOI INFORMADO NUMERO ATUAL";
+                            //    byte[] bytes = message.ToUTF8(true);
+                            //    netStream.Write(bytes, 0 , bytes.Length);
+                            //    aux = false;
+                            //    goto Finish;
+                            //}
+                            Error2:
+                            {
+                                //string message = $"CARGAVENDESEQ@@O NUMERO DO PEDIDO ATUAL INFORMADO ESTA INCORRETO! PEDIDO ATUAL: {Sequencia.NROPEDAT}";
+                                //byte[] bytes = message.ToUTF8(true);
+                                //netStream.Write(bytes, 0, bytes.Length);
+                                //aux = false;
                                 aux = true;
                                 goto Finish;
+                            }
+                        Finish: { } // Somente para saltar o rótulo de erro
                         }
-                        else
-                            aux = false;
-
-                        //Error1:
-                        //{
-                        //    string message = "CARGAVENDESEQ@@NAO FOI INFORMADO NUMERO ATUAL";
-                        //    byte[] bytes = message.ToUTF8(true);
-                        //    netStream.Write(bytes, 0 , bytes.Length);
-                        //    aux = false;
-                        //    goto Finish;
-                        //}
-                        Error2:
-                        {
-                            //string message = $"CARGAVENDESEQ@@O NUMERO DO PEDIDO ATUAL INFORMADO ESTA INCORRETO! PEDIDO ATUAL: {Sequencia.NROPEDAT}";
-                            //byte[] bytes = message.ToUTF8(true);
-                            //netStream.Write(bytes, 0, bytes.Length);
-                            //aux = false;
-                            aux = true;
-                            goto Finish;
-                        }
-                    Finish: { } // Somente para saltar o rótulo de erro
                     }
-                }
-                catch (Exception ex)
-                {
-                    string error = "";
-                    Log.Error(error, ex.ToString());
-                    aux = false;
-                }
-                finally
-                {
-                    if (client.Connected) client.Close();
-                    if (netStream != null) netStream.Close();
-                }
+                    catch (Exception ex)
+                    {
+                        string error = "";
+                        Log.Error(error, ex.ToString());
+                        aux = false;
+                    }
+                    finally
+                    {
+                        if (client.Connected) client.Close();
+                        if (netStream != null) netStream.Close();
+                    }
 
-            });
+                });
 
-            t.Start();
-            t.Join();
+                t.Start();
+                t.Join();
+            }
+            else
+                aux = true;
 
             return aux;
         }

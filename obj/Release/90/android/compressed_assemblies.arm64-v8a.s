@@ -44,7 +44,7 @@
 
 	/* 4: EloPedidos.dll */
 	/* uncompressed_file_size */
-	.word	629760
+	.word	628736
 	/* loaded */
 	.byte	0
 	/* data */

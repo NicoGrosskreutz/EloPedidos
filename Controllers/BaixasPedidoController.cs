@@ -51,7 +51,7 @@ namespace EloPedidos.Controllers
                 conn.Update(b);
         }
 
-        public double totalReceberCliente(long pCG_PESSOA_ID, out string[] _Pedidos) => new PedidoController().totalReceberCliente(pCG_PESSOA_ID, out _Pedidos);
+        public double totalReceberCliente(long ID_PESS, out string[] _Pedidos) => new PedidoController().totalReceberCliente(ID_PESS, out _Pedidos);
 
         public List<Pagamento> FindAllBaixas()
         {
@@ -92,7 +92,6 @@ namespace EloPedidos.Controllers
             try
             {
                 ValidarBaixa(baixa);
-                //baixa.INDSINC = false;
                 baixa.USRULTAT = new OperadorController().Operador.USROPER;
                 baixa.DTHULTAT = DateTime.Now;
                 return DAO.Save(baixa);
@@ -295,7 +294,6 @@ namespace EloPedidos.Controllers
             {
                 double vlrDevol = this.FindValorDevol(new PedidoController().FindById(baixa.FT_PEDIDO_ID.Value));
                 baixa.VLRDEVOL = vlrDevol;
-
                 baixa.VLRPGMT += 0;
                 baixa.ULTPGMTO = 0;
                 baixa.INDPAGO = "S";

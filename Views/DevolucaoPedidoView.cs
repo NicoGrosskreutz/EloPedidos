@@ -47,18 +47,15 @@ namespace EloPedidos.Views
         List<BaixasPedido> baixas = null;
         List<ItemPedido> itensPedidos = null;
         List<DevolucaoItem> itensDevolucao = null;
+        List<Pedido> pedidoImpressao = null;
         private List<BluetoothDevice> Devices { get; set; } = null;
         public BluetoothAdapter Adapter { get { return BluetoothAdapter.DefaultAdapter; } }
         private Pedido SelectedOrder = null;
         private ItemPedido SelectedIten = null;
         private long? SelectedItenPosition = null;
         private long? SelectedOrderPosition = null;
-        private bool permissionToBack = true;
+        private int PositionOrders = 0;
 
-        /// <summary>
-        /// USADO PARA CONTROLAR O QUE ESTÁ SENDO MANDADO PARA IMPRESSÃO, 0 = LIVRE, 1 = AGUARDAR, 2 = CANCELADO
-        /// </summary>
-        private int ControleDeImpressoes { get; set; } = 0;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -99,6 +96,7 @@ namespace EloPedidos.Views
             baixas = new List<BaixasPedido>();
             itensPedidos = new List<ItemPedido>();
             itensDevolucao = new List<DevolucaoItem>();
+            pedidoImpressao = new List<Pedido>();
 
             txCODPESS.LongClick += (sender, eventArgs) =>
             {
@@ -379,11 +377,11 @@ namespace EloPedidos.Views
                             var p = new PedidoController().FindById(b.FT_PEDIDO_ID.Value);
                             if (p != null) pedidos.Add(p);
                         });
-
+                        pedidoImpressao = pedidos;
                         AlertDialog.Builder builder = new AlertDialog.Builder(this);
                         builder.SetTitle("IMPRESSÕES");
                         builder.SetMessage("GOSTARIA DE IMPRIMIR OS PEDIDOS DESSE CLEINTE ?");
-                        builder.SetPositiveButton("SIM", (s, a) => { ImprimirDialog(pedidos); });
+                        builder.SetPositiveButton("SIM", (s, a) => { Imprimir(pedidoImpressao[PositionOrders]); });
                         builder.SetNegativeButton("NÃO", (s, a) => { return; });
                         AlertDialog dialog = builder.Create();
                         dialog.Show();
@@ -684,7 +682,9 @@ namespace EloPedidos.Views
                     {
                         try
                         {
-                            ImprimirDialog(pedidos);
+                            //ImprimirDialog(pedidos);
+                            pedidoImpressao = pedidos;
+                            Imprimir(pedidoImpressao[PositionOrders]);
                         }
                         catch (Exception e)
                         {
@@ -1093,7 +1093,6 @@ namespace EloPedidos.Views
                         auxSAVE = true;
                     });
                 }
-
                 return auxSAVE;
             }
             catch (Exception ex)
@@ -1274,332 +1273,263 @@ namespace EloPedidos.Views
 
         private void Imprimir(Pedido p)
         {
-            Task.Run(() =>
-            {
-                try
-                {
-                    var printerController = new PrinterController();
-                    string text = string.Empty;
-                    text = printerController.FormatOrderForPrintA7(new PedidoController().FindById(p.FT_PEDIDO_ID.Value), "devolucao");
-
-                    SisLog.Logger($"GEROU O TEXTO", "Imprimir");
-
-                    string aux = text;
-                    string segVIA = text;
-                    BluetoothSocket socket = printerController.GetSocket(txDevice.Text);
-
-                    SisLog.Logger($"INSTANSIOU O SOCKET", "Imprimir");
-                    SisLog.Logger($"{socket != null}", "Imprimir");
-
-                    if (socket != null)
+            new DialogFactory().CreateDialog(this,
+                    "IMPRESSÕES !!!",
+                    $"GOSTARIA DE IMPRIMIR O PEDIDO {p.NROPEDID} ?",
+                    "SIM",
+                    () =>
                     {
-                        if (!socket.IsConnected)
-                            printerController.ConnectPrinter(socket, txDevice.Text);
-
-                        SisLog.Logger($"{socket.IsConnected}", "Imprimir");
-
-                        if (socket.IsConnected)
+                        Task.Run(() =>
                         {
-                            bool isImpressaoOk = true;
                             try
                             {
-                                RunOnUiThread(() => this.Msg("ENVIANDO IMPRESSÃO PARA O DISPOSITIVO! AGUARDE..."));
+                                var printerController = new PrinterController();
+                                string text = string.Empty;
+                                text = printerController.FormatOrderForPrintA7(new PedidoController().FindById(p.FT_PEDIDO_ID.Value), "devolucao");
 
-                                SisLog.Logger($"IMPRIMINDO A 1° VIA", "Imprimir");
+                                SisLog.Logger($"GEROU O TEXTO", "Imprimir");
 
-                                text = "1 VIA \n" + aux + "\n\n";
-                                socket.OutputStream.Write(text.ToASCII(), 0, text.ToASCII().Length);
+                                string aux = text;
+                                string segVIA = text;
+                                BluetoothSocket socket = printerController.GetSocket(txDevice.Text);
 
-                                SisLog.Logger($"IMPRIMIU A 1° VIA", "Imprimir");
-                            }
-                            catch (Exception ex)
-                            {
-                                isImpressaoOk = false;
-                                RunOnUiThread(() =>
+                                SisLog.Logger($"INSTANSIOU O SOCKET", "Imprimir");
+                                SisLog.Logger($"{socket != null}", "Imprimir");
+
+                                if (socket != null)
                                 {
-                                    try
-                                    {
-                                        AlertDialog.Builder b = new AlertDialog.Builder(this);
-                                        b.SetTitle("AVISO");
-                                        b.SetMessage("FALHA AO IMPRIMIR!\nTENTAR NOVAMENTE ?");
-                                        b.SetPositiveButton("SIM", (s, a) => { Imprimir(p); });
-                                        b.SetNegativeButton("CANCELAR", (s, a) => { ControleDeImpressoes = 0; return; });
-                                        b.SetCancelable(false);
-                                        AlertDialog dialog = b.Create();
-                                        dialog.Show();
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        Log.Debug("ERROR", ex.ToString());
-                                        ControleDeImpressoes = 0;
-                                    }
-                                });
+                                    if (!socket.IsConnected)
+                                        printerController.ConnectPrinter(socket, txDevice.Text);
 
-                                SisLog.Logger(ex.ToString(), "IMPRESSAO");
-                            }
+                                    SisLog.Logger($"{socket.IsConnected}", "Imprimir");
 
-                            if (isImpressaoOk)
-                                RunOnUiThread(() =>
-                                {
-                                    SisLog.Logger($"ENTRANDO NO DIALOG PARA 2° VIA", "Imprimir");
-                                    try
+                                    if (socket.IsConnected)
                                     {
-                                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                                        builder.SetTitle("IMPRESSÕES !!!");
-                                        builder.SetMessage("GOSTARIA DE IMPRIMIR A 2° VIA ?");
-                                        builder.SetPositiveButton("SIM", (s, a) =>
+                                        bool isImpressaoOk = true;
+                                        try
+                                        {
+                                            RunOnUiThread(() => this.Msg("ENVIANDO IMPRESSÃO PARA O DISPOSITIVO! AGUARDE..."));
+
+                                            SisLog.Logger($"IMPRIMINDO A 1° VIA", "Imprimir");
+
+                                            text = "1 VIA \n" + aux + "\n\n";
+                                            socket.OutputStream.Write(text.ToASCII(), 0, text.ToASCII().Length);
+
+                                            SisLog.Logger($"IMPRIMIU A 1° VIA", "Imprimir");
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            isImpressaoOk = false;
+                                            RunOnUiThread(() =>
+                                            {
+                                                try
+                                                {
+                                                    AlertDialog.Builder b = new AlertDialog.Builder(this);
+                                                    b.SetTitle("AVISO");
+                                                    b.SetMessage("FALHA AO IMPRIMIR!\nTENTAR NOVAMENTE ?");
+                                                    b.SetPositiveButton("SIM", (s, a) => { Imprimir(p); });
+                                                    b.SetNegativeButton("CANCELAR", (s, a) =>
+                                                    {
+                                                        PositionOrders += 1;
+                                                        if (pedidoImpressao.Count >= PositionOrders + 1)
+                                                            Imprimir(pedidoImpressao[PositionOrders]);
+                                                        else
+                                                        {
+                                                            pedidoImpressao.Clear();
+                                                            PositionOrders = 0;
+                                                        }
+                                                    });
+                                                    b.SetCancelable(false);
+                                                    AlertDialog dialog = b.Create();
+                                                    dialog.Show();
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    Log.Debug("ERROR", ex.ToString());
+                                                }
+                                            });
+
+                                            SisLog.Logger(ex.ToString(), "IMPRESSAO");
+                                        }
+
+                                        if (isImpressaoOk)
+                                            RunOnUiThread(() =>
+                                            {
+                                                SisLog.Logger($"ENTRANDO NO DIALOG PARA 2° VIA", "Imprimir");
+                                                try
+                                                {
+                                                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                                                    builder.SetTitle("IMPRESSÕES !!!");
+                                                    builder.SetMessage("GOSTARIA DE IMPRIMIR A 2° VIA ?");
+                                                    builder.SetPositiveButton("SIM", (s, a) =>
+                                                    {
+                                                        try
+                                                        {
+                                                            RunOnUiThread(() => this.Msg("ENVIANDO IMPRESSÃO PARA O DISPOSITIVO! AGUARDE..."));
+
+                                                            SisLog.Logger($"IMPRIMINDO A 2° VIA", "Imprimir");
+
+                                                            text = "2 VIA \n" + segVIA + "\n\n";
+                                                            if (socket != null)
+                                                                socket.OutputStream.Write(text.ToASCII(), 0, text.ToASCII().Length);
+
+                                                            SisLog.Logger($"IMPRIMIU A 2° VIA", "Imprimir");
+
+                                                            printerController.ClosePrinter();
+
+                                                            SisLog.Logger($"FECHOU O SOCKET", "Imprimir");
+
+                                                            PositionOrders += 1;
+                                                            if (pedidoImpressao.Count >= PositionOrders + 1)
+                                                                Imprimir(pedidoImpressao[PositionOrders]);
+                                                            else
+                                                            {
+                                                                pedidoImpressao.Clear();
+                                                                PositionOrders = 0;
+                                                            }
+                                                        }
+                                                        catch (Exception ex)
+                                                        {
+                                                            RunOnUiThread(() =>
+                                                            {
+                                                                try
+                                                                {
+                                                                    AlertDialog.Builder b = new AlertDialog.Builder(this);
+                                                                    b.SetTitle("AVISO");
+                                                                    b.SetMessage("FALHA AO IMPRIMIR!\nTENTAR NOVAMENTE ?");
+                                                                    b.SetPositiveButton("SIM", (s, a) => { Imprimir(p); });
+                                                                    b.SetNegativeButton("CANCELAR", (s, a) =>
+                                                                    {
+                                                                        PositionOrders += 1;
+                                                                        if (pedidoImpressao.Count >= PositionOrders + 1)
+                                                                            Imprimir(pedidoImpressao[PositionOrders]);
+                                                                        else
+                                                                        {
+                                                                            pedidoImpressao.Clear();
+                                                                            PositionOrders = 0;
+                                                                        }
+                                                                    });
+                                                                    b.SetCancelable(false);
+                                                                    AlertDialog dialog = b.Create();
+                                                                    dialog.Show();
+                                                                }
+                                                                catch (Exception ex)
+                                                                {
+                                                                    Log.Debug("ERRO_IMPRESSAO", ex.ToString());
+                                                                }
+                                                            });
+
+                                                            SisLog.Logger(ex.ToString(), "ERRO_IMPRESSAO");
+                                                        }
+                                                    });
+                                                    builder.SetNegativeButton("NÃO", (s, a) =>
+                                                    {
+                                                        if (socket.IsConnected)
+                                                            printerController.ClosePrinter();
+
+                                                        PositionOrders += 1;
+                                                        if (pedidoImpressao.Count >= PositionOrders + 1)
+                                                            Imprimir(pedidoImpressao[PositionOrders]);
+                                                        else
+                                                        {
+                                                            pedidoImpressao.Clear();
+                                                            PositionOrders = 0;
+                                                        }
+
+                                                        return;
+                                                    });
+                                                    AlertDialog dialog = builder.Create();
+                                                    dialog.Show();
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    Log.Debug("ERRO_IMPRESSAO", ex.ToString());
+                                                }
+                                            });
+                                    }
+                                    else
+                                        RunOnUiThread(() =>
                                         {
                                             try
                                             {
-                                                RunOnUiThread(() => this.Msg("ENVIANDO IMPRESSÃO PARA O DISPOSITIVO! AGUARDE..."));
-
-                                                SisLog.Logger($"IMPRIMINDO A 2° VIA", "Imprimir");
-
-                                                text = "2 VIA \n" + segVIA + "\n\n";
-                                                if (socket != null)
-                                                    socket.OutputStream.Write(text.ToASCII(), 0, text.ToASCII().Length);
-
-                                                SisLog.Logger($"IMPRIMIU A 2° VIA", "Imprimir");
-
-                                                printerController.ClosePrinter();
-
-                                                SisLog.Logger($"FECHOU O SOCKET", "Imprimir");
-
-                                                ControleDeImpressoes = 0;
+                                                AlertDialog.Builder b = new AlertDialog.Builder(this);
+                                                b.SetTitle("AVISO");
+                                                b.SetMessage("FAVOR, LIGUE A IMPRESSORA!\nTENTAR NOVAMENTE ?");
+                                                b.SetPositiveButton("SIM", (s, a) => { Imprimir(p); });
+                                                b.SetNegativeButton("CANCELAR", (s, a) =>
+                                                {
+                                                    PositionOrders += 1;
+                                                    if (pedidoImpressao.Count >= PositionOrders + 1)
+                                                        Imprimir(pedidoImpressao[PositionOrders]);
+                                                    else
+                                                    {
+                                                        pedidoImpressao.Clear();
+                                                        PositionOrders = 0;
+                                                    }
+                                                });
+                                                b.SetCancelable(false);
+                                                AlertDialog dialog = b.Create();
+                                                dialog.Show();
                                             }
                                             catch (Exception ex)
                                             {
-                                                RunOnUiThread(() =>
-                                                {
-                                                    try
-                                                    {
-                                                        AlertDialog.Builder b = new AlertDialog.Builder(this);
-                                                        b.SetTitle("AVISO");
-                                                        b.SetMessage("FALHA AO IMPRIMIR!\nTENTAR NOVAMENTE ?");
-                                                        b.SetPositiveButton("SIM", (s, a) => { Imprimir(p); });
-                                                        b.SetNegativeButton("CANCELAR", (s, a) => { ControleDeImpressoes = 0; return; });
-                                                        b.SetCancelable(false);
-                                                        AlertDialog dialog = b.Create();
-                                                        dialog.Show();
-                                                    }
-                                                    catch (Exception ex)
-                                                    {
-                                                        Log.Debug("ERRO_IMPRESSAO", ex.ToString());
-                                                    }
-                                                });
-
-                                                SisLog.Logger(ex.ToString(), "ERRO_IMPRESSAO");
-                                                ControleDeImpressoes = 0;
+                                                Log.Debug("ERRO_IMPRESSAO", ex.ToString());
                                             }
                                         });
-                                        builder.SetNegativeButton("NÃO", (s, a) =>
-                                        {
-                                            ControleDeImpressoes = 0;
-                                            if (socket.IsConnected)
-                                                printerController.ClosePrinter();
 
-                                            return;
-                                        });
-                                        AlertDialog dialog = builder.Create();
-                                        dialog.Show();
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        Log.Debug("ERRO_IMPRESSAO", ex.ToString());
-                                        ControleDeImpressoes = 0;
-                                    }
-                                });
-                        }
-                        else
-                            RunOnUiThread(() =>
-                            {
-                                try
-                                {
-                                    AlertDialog.Builder b = new AlertDialog.Builder(this);
-                                    b.SetTitle("AVISO");
-                                    b.SetMessage("FAVOR, LIGUE A IMPRESSORA!\nTENTAR NOVAMENTE ?");
-                                    b.SetPositiveButton("SIM", (s, a) => { Imprimir(p); });
-                                    b.SetNegativeButton("CANCELAR", (s, a) => { ControleDeImpressoes = 0; return; });
-                                    b.SetCancelable(false);
-                                    AlertDialog dialog = b.Create();
-                                    dialog.Show();
                                 }
-                                catch (Exception ex)
-                                {
-                                    ControleDeImpressoes = 0;
-                                }
-                            });
-
-                    }
-                    else
-                        RunOnUiThread(() =>
-                        {
-                            try
-                            {
-                                AlertDialog.Builder b = new AlertDialog.Builder(this);
-                                b.SetTitle("AVISO");
-                                b.SetMessage("IMPOSSÍVEL IMPRIMIR COM O DISPOSITIVO SELECIONADO!\nTENTAR NOVAMENTE ?");
-                                b.SetPositiveButton("SIM", (s, a) => { Imprimir(p); });
-                                b.SetNegativeButton("CANCELAR", (s, a) => { ControleDeImpressoes = 0; return; });
-                                b.SetCancelable(false);
-                                AlertDialog dialog = b.Create();
-                                dialog.Show();
-                            }
-                            catch (Exception ex)
-                            {
-                                ControleDeImpressoes = 0;
-                            }
-                        });
-
-                }
-                catch (Exception ex)
-                {
-                    RunOnUiThread(() =>
-                    {
-                        SisLog.Logger(ex.ToString(), "ERRO_IMPRESSAO");
-                    });
-                    ControleDeImpressoes = 0;
-                }
-            });
-        }
-        private void ImprimirDialog(List<Pedido> pedidos)
-        {
-            try
-            {
-                if (!string.IsNullOrEmpty(txDevice.Text))
-                {
-                    try
-                    {
-                        ControleDeImpressoes = 0;
-                        if (pedidos.Count > 0)
-                            Task.Run(() =>
-                            {
-                                permissionToBack = false;
-                                for (int i = 0; i < pedidos.Count; i++)
-                                {
-                                    SisLog.Logger($"MANDANDO PARA IMPRESSAO {i}° PEDIDO", "ImprimirDialog");
-                                    Pedido p = pedidos[i];
-                                    try
+                                else
+                                    RunOnUiThread(() =>
                                     {
-                                        Task.Run(() =>
+                                        try
                                         {
-                                            if (ControleDeImpressoes == 1)
+                                            AlertDialog.Builder b = new AlertDialog.Builder(this);
+                                            b.SetTitle("AVISO");
+                                            b.SetMessage("IMPOSSÍVEL IMPRIMIR COM O DISPOSITIVO SELECIONADO!\nTENTAR NOVAMENTE ?");
+                                            b.SetPositiveButton("SIM", (s, a) => { Imprimir(p); });
+                                            b.SetNegativeButton("CANCELAR", (s, a) =>
                                             {
-                                                for (int y = 0; y < 20; i++)
+                                                PositionOrders += 1;
+                                                if (pedidoImpressao.Count >= PositionOrders + 1)
+                                                    Imprimir(pedidoImpressao[PositionOrders]);
+                                                else
                                                 {
-                                                    if (ControleDeImpressoes == 0)
-                                                        break;
-                                                    else
-                                                        Thread.Sleep(1000);
+                                                    pedidoImpressao.Clear();
+                                                    PositionOrders = 0;
                                                 }
-                                            }
-
-
-                                            if (ControleDeImpressoes == 0)
-                                            {
-                                                ControleDeImpressoes = 1;
-                                                Task.Run(() =>
-                                                {
-                                                    RunOnUiThread(() =>
-                                                    {
-                                                        SisLog.Logger($"ENTROU NO RunOnUiThread", "ImprimirDialog");
-
-                                                        try
-                                                        {
-                                                            new DialogFactory().CreateDialog(this,
-                                                            "IMPRESSÕES !!!",
-                                                            $"GOSTARIA DE IMPRIMIR O PEDIDO {p.NROPEDID} ?",
-                                                            "SIM",
-                                                            () =>
-                                                            {
-                                                                Task.Run(() => Imprimir(p));
-                                                            },
-                                                            "NÃO",
-                                                            () => { ControleDeImpressoes = 0; });
-                                                        }
-                                                        catch (Exception e)
-                                                        {
-                                                            SisLog.Logger(e.ToString(), "ImprimirDialog");
-                                                        }
-
-                                                    });
-                                                });
-                                            }
-                                        });
-
-                                        if (i + 1 == pedidos.Count)
-                                            permissionToBack = true;
-                                    }
-                                    catch (Exception e)
-                                    {
-                                        permissionToBack = true;
-                                        ControleDeImpressoes = 0;
-                                        RunOnUiThread(() =>
+                                            });
+                                            b.SetCancelable(false);
+                                            AlertDialog dialog = b.Create();
+                                            dialog.Show();
+                                        }
+                                        catch (Exception ex)
                                         {
-                                            SisLog.Logger(e.ToString(), "ImprimirDialog_03");
-                                        });
-                                    }
-                                }
-                            });
-                    }
-                    catch (Exception e)
-                    {
-                        RunOnUiThread(() =>
-                        {
-                            try
-                            {
-                                AlertDialog.Builder b = new AlertDialog.Builder(this);
-                                b.SetTitle("AVISO");
-                                b.SetMessage("FAVOR, LIGUE A IMPRESSORA!\nTENTAR NOVAMENTE ?");
-                                b.SetPositiveButton("SIM", (s, a) => { ImprimirDialog(pedidos); });
-                                b.SetNegativeButton("CANCELAR", (s, a) => { return; });
-                                b.SetCancelable(false);
-                                AlertDialog dialog = b.Create();
-                                dialog.Show();
+                                            Log.Debug("ERRO_IMPRESSAO", ex.ToString());
+                                        }
+                                    });
+
                             }
                             catch (Exception ex)
                             {
+                                RunOnUiThread(() =>
+                                {
+                                    SisLog.Logger(ex.ToString(), "ERRO_IMPRESSAO");
+                                });
                             }
-
-                            SisLog.Logger(e.ToString(), "ImprimirDialog_02");
                         });
-                    }
-                }
-                else
-                    RunOnUiThread(() =>
+                    },
+                    "NÃO",
+                    () =>
                     {
-                        AlertDialog.Builder b = new AlertDialog.Builder(this);
-                        b.SetTitle("AVISO");
-                        b.SetMessage("NENHUM DISPOSITIVO DE IMPRESSÃO SELECIONADO!");
-                        b.SetNeutralButton("OK", (s, a) => { return; });
-                        b.SetCancelable(false);
-                        AlertDialog dialog = b.Create();
-                        dialog.Show();
-
+                        PositionOrders += 1;
+                        if (pedidoImpressao.Count >= PositionOrders + 1)
+                            Imprimir(pedidoImpressao[PositionOrders]);
+                        else
+                        {
+                            pedidoImpressao.Clear();
+                            PositionOrders = 0;
+                        }
                     });
-            }
-            catch (Exception e)
-            {
-                RunOnUiThread(() =>
-                {
-                    try
-                    {
-                        AlertDialog.Builder b = new AlertDialog.Builder(this);
-                        b.SetTitle("AVISO");
-                        b.SetMessage("FAVOR, LIGUE A IMPRESSORA!\nTENTAR NOVAMENTE ?");
-                        b.SetPositiveButton("SIM", (s, a) => { ImprimirDialog(pedidos); });
-                        b.SetNegativeButton("CANCELAR", (s, a) => { return; });
-                        b.SetCancelable(false);
-                        AlertDialog dialog = b.Create();
-                        dialog.Show();
-                    }
-                    catch (Exception ex)
-                    {
-                    }
-
-                    SisLog.Logger(e.ToString(), "ImprimirDialog_01");
-                });
-            }
         }
 
         protected void LimparTela()
@@ -1654,13 +1584,6 @@ namespace EloPedidos.Views
             if (timer != null)
                 timer.Stop();
             base.OnDestroy();
-        }
-        public override void OnBackPressed()
-        {
-            if (permissionToBack)
-                base.OnBackPressed();
-            else
-                this.Msg("Enviando para a impressora...");
         }
 
         public void loadDevices()
@@ -1764,7 +1687,6 @@ namespace EloPedidos.Views
                     {
                         EnableView();
                         progressBar.Visibility = ViewStates.Invisible;
-                        //LoadListViewBaixa(txCODPESS.Text.ToLong(), ckTODOS.Checked);
                         LoadListViewBaixa(txCODPESS.Text.ToLong());
 
                     });

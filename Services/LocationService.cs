@@ -86,6 +86,7 @@ namespace EloPedidos.Services
 
             StartForeground(1, notification.Build());
             startSincronizacao();
+            startLocationUpdates();
 
             //StartNotification();
 

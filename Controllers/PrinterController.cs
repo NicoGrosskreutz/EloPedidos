@@ -819,7 +819,7 @@ namespace EloPedidos.Controllers
                 builder.AppendLine($"  {DATARET}   ___/___/______    ___/___/______  ");
 
 
-                double toReceive = new BaixasPedidoController().totalReceberCliente(pedido.CG_PESSOA_ID.Value, out string[] _Pedidos);
+                double toReceive = new BaixasPedidoController().totalReceberCliente(pedido.ID_PESSOA.Value, out string[] _Pedidos);
                 if (toReceive > 0)
                 {
                     builder.AppendLine($"{BoldOn}SALDO DEVEDOR:    R$ {toReceive.ToString("N2").PadLeft(7)}{BoldOff}");
@@ -1042,7 +1042,7 @@ namespace EloPedidos.Controllers
                 ultimoPagamento = totalPAGO.ToString("N2");
                 receber = baixa.VLRRECBR.ToString("N2");
                 valorVendido = (bController.ValorTotal(pedido.NROPEDID) - baixa.VLRDEVOL).ToString("N2");
-                totalReceber = new PedidoController().totalReceberCliente(pessoa.CG_PESSOA_ID.Value, out string[] _pedidos).ToString("N2");
+                totalReceber = new PedidoController().totalReceberCliente(pessoa.ID.Value, out string[] _pedidos).ToString("N2");
 
                 var formatValroVendido = valorVendido.PadLeft(8);
                 var formatComissaoCliente = comissaoCliente.ToString("N2").PadLeft(8);

@@ -252,6 +252,9 @@ namespace EloPedidos.Views
 
 					if (socket != null)
 					{
+						if (!socket.IsConnected)
+							printerController.ConnectPrinter(socket, NOMIMPRE);
+
 						if (socket.IsConnected)
 						{
 							socket.OutputStream.Write(text.ToASCII(), 0, text.ToASCII().Length);

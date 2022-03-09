@@ -263,7 +263,6 @@ namespace EloPedidos.Views
             txTotal.Enabled = false;
             txQtd.Enabled = false;
             txTotal.EnableView(false);
-            ckPrazo.Checked = true;
 
             progressBar.Visibility = ViewStates.Invisible;
             // ==================
@@ -607,9 +606,6 @@ namespace EloPedidos.Views
                     AlertDialog dialog = builder.Create();
                     dialog.Show();
 
-                    ShowKeyboard(txPesquisa);
-                    txPesquisa.RequestFocus();
-
                     int MUNIC_ID = 0;
                     Municipio munic = null;
                     if (new ConfigController().GetConfig().CODMUNPQ != 0)
@@ -743,6 +739,9 @@ namespace EloPedidos.Views
                             d.Show();
                         }
                     };
+
+                    txPesquisa.RequestFocus();
+                    ShowKeyboard(txPesquisa);
                 }
             };
 
@@ -771,8 +770,6 @@ namespace EloPedidos.Views
                     dialog.Show();
 
                     ckROMAN.Checked = true;
-                    ShowKeyboard(txPesquisa);
-                    txPesquisa.ResetPivot();
 
                     List<RomaneioItem> romaneio = new RomaneioController().FindAll(); ;
 
@@ -889,6 +886,9 @@ namespace EloPedidos.Views
                         dialog.Cancel();
                         ShowKeyboard(txQtd);
                     };
+
+                    txPesquisa.RequestFocus();
+                    ShowKeyboard(txPesquisa);
                 }
 
             };
@@ -985,7 +985,7 @@ namespace EloPedidos.Views
 
                 Position = args.Position;
 
-                btnSalvarProd.Text = "Atualizar";
+                btnSalvarProd.Text = "SALVAR";
 
                 txPreco.Enabled = true;
                 txPreco.Focusable = true;
@@ -1004,7 +1004,7 @@ namespace EloPedidos.Views
                     Position = null;
                     LimparDadosProduto();
                     btnExcluirProd.Enabled = false;
-                    btnSalvarProd.Text = "Salvar";
+                    btnSalvarProd.Text = "SALVAR";
                 }
                 else
                     this.Msg("NENHUM PRODUTO SELECIONADO!");
@@ -1788,7 +1788,7 @@ namespace EloPedidos.Views
                 txtATRASADO.Visibility = ViewStates.Invisible;
 
                 Pessoa p = new PessoaController().FindByCODPESS(long.Parse(txCODPESS.Text));
-                double valorAbatimento = pController.totalReceberCliente(p.CG_PESSOA_ID.Value, out string[] _Pedidos);
+                double valorAbatimento = pController.totalReceberCliente(p.ID.Value, out string[] _Pedidos);
                 if (valorAbatimento != 0)
                 {
                     lblVLRABRT.Visibility = ViewStates.Visible;
@@ -1905,6 +1905,7 @@ namespace EloPedidos.Views
             double saldo = 0;
             double vlrPreco = txPreco.Text.ToDouble();
             double vlrVenda = p.PRCVENDA;
+            double saldoRomaneio = 0;
 
             double quantidade = 0;
             if (!ckCXPC.Checked)
@@ -1928,8 +1929,10 @@ namespace EloPedidos.Views
                         }
                     }
 
-            RomaneioItem romaneioItem = null;
-            if ((romaneioItem = new RomaneioController().FindByIdItem(p.CG_PRODUTO_ID.Value)) == null)
+            RomaneioItem romaneioItem = new RomaneioController().FindByIdItem(p.CG_PRODUTO_ID.Value);
+            if(romaneioItem != null) saldoRomaneio = (romaneioItem.QTDPROD - (romaneioItem.QTDVENDA + romaneioItem.QTDBRINDE) + romaneioItem.QTDDEVCL);
+
+            if (romaneioItem == null)
             {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.SetTitle("AVISO");
@@ -1944,7 +1947,7 @@ namespace EloPedidos.Views
                 AlertDialog alertDialog = builder.Create();
                 alertDialog.Show();
             }
-            else if (quantidade > (romaneioItem.QTDPROD - (romaneioItem.QTDVENDA + romaneioItem.QTDBRINDE) + romaneioItem.QTDDEVCL))
+            else if (quantidade > saldoRomaneio)
             {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.SetTitle("AVISO");
@@ -2000,7 +2003,7 @@ namespace EloPedidos.Views
                     CODPROD = txCODPROD.Text,
                     NOMPROD = txNOMPROD.Text,
                     IDTUNID = p.IDTUNID,
-                    QTDUNID = quantidade,
+                    QTDATPRO = quantidade,
                     QTDPROD = quantidade,
                     VLRUNIT = txPreco.Text.ToDouble(),
                     INDBRIND = ckBrinde.Checked,
@@ -2025,25 +2028,50 @@ namespace EloPedidos.Views
                 builder.SetNeutralButton("CANCELAR", (s, a) => { return; });
                 builder.SetPositiveButton("SALVAR", (s, a) =>
                 {
-                    ItensPedido.Add(new ItemPedido()
+                    ItensPedido.Where(ip => ip.CG_PRODUTO_ID == p.CG_PRODUTO_ID).ToList().ForEach(i =>
                     {
-                        CG_PRODUTO_ID = p.CG_PRODUTO_ID,
-                        FT_PEDIDO_ID = this.FT_PEDIDO_ID,
-                        CODPROD = codProd,
-                        NOMPROD = nomprod,
-                        IDTUNID = p.IDTUNID,
-                        QTDUNID = quantidade,
-                        QTDPROD = quantidade,
-                        VLRUNIT = valorprod,
-                        INDBRIND = isbrindE,
-                        SITPEDID = 1,
-                        Produto = p
+                        saldoRomaneio -= i.QTDATPRO;
                     });
 
-                    var adapter = new Adapter.AdapterItensPedido(this, ItensPedido);
-                    listView.Adapter = adapter;
+                    if (quantidade > saldoRomaneio)
+                    {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                        builder.SetTitle("AVISO");
+                        builder.SetMessage("QUANTIDADE MAIOR DO QUE A ENCONTRADA NO ESTOQUE!\nNÃO FOI POSSÍVEL SALVAR O PRODUTO");
+                        builder.SetCancelable(false);
+                        builder.SetNeutralButton("OK", (s, e) =>
+                        {
+                            txQtd.SelectAll();
+                            txQtd.SetSelectAllOnFocus(true);
+                            txQtd.RequestFocus();
+                            return;
+                        });
 
-                    ListTotalValue();
+                        AlertDialog alertDialog = builder.Create();
+                        alertDialog.Show();
+                    }
+                    else
+                    {
+                        ItensPedido.Add(new ItemPedido()
+                        {
+                            CG_PRODUTO_ID = p.CG_PRODUTO_ID,
+                            FT_PEDIDO_ID = this.FT_PEDIDO_ID,
+                            CODPROD = codProd,
+                            NOMPROD = nomprod,
+                            IDTUNID = p.IDTUNID,
+                            QTDATPRO = quantidade,
+                            QTDPROD = quantidade,
+                            VLRUNIT = valorprod,
+                            INDBRIND = isbrindE,
+                            SITPEDID = 1,
+                            Produto = p
+                        });
+
+                        var adapter = new Adapter.AdapterItensPedido(this, ItensPedido);
+                        listView.Adapter = adapter;
+
+                        ListTotalValue();
+                    }
                 });
                 builder.SetNegativeButton("ATUALIZAR", (s, a) =>
                 {
@@ -2057,8 +2085,8 @@ namespace EloPedidos.Views
                         IDTUNID = p.IDTUNID,
                         CODPROD = codProd,
                         NOMPROD = nomprod,
+                        QTDATPRO = quantidade,
                         QTDPROD = quantidade,
-                        QTDUNID = quantidade,
                         VLRUNIT = valorprod,
                         INDBRIND = isbrindE,
                         SITPEDID = 1,
@@ -2484,12 +2512,10 @@ namespace EloPedidos.Views
                 DateTime dateEntry = DateTime.Parse(txData.Text);
                 txtDATARET.Text = dateEntry.AddMonths(1).ToString("dd/MM/yyyy");
                 lbTotal.Text = "0,00";
-                btnSalvarProd.Text = "Salvar";
+                btnSalvarProd.Text = "SALVAR";
 
                 txDSCOBSER.Text = string.Empty;
-                ckPrazo.Checked = true;
                 btnImprimir.Enabled = true;
-                ckPrazo.Enabled = false;
 
                 txCODPROD.Text = string.Empty;
                 txCODPESS.Text = string.Empty;
@@ -2569,6 +2595,7 @@ namespace EloPedidos.Views
 
             txNOMPROD.Enabled = false;
             txtSALDO.Enabled = false;
+            ckPrazo.Enabled = false;
         }
 
 
@@ -3689,6 +3716,7 @@ namespace EloPedidos.Views
                                 Vendedor vendedor = vendedorC.Vendedor;
                                 SequenciaController sequenciaC = new SequenciaController();
                                 OperadorController operadorC = new OperadorController();
+                                PedidoController pedidoController = new PedidoController();
 
                                 string id = vendedor.CG_VENDEDOR_ID.Value.ToString("D4");
                                 string sequencia = "000000";
@@ -3709,7 +3737,7 @@ namespace EloPedidos.Views
                                                 DateTime DateTimeLastSEQ = sequenciaC.GetLastDateTime();
                                                 strSequencia = $"CARGAVENDESEQ{id}000000{DateTimeLastSEQ}";
                                             }
-                                            if (sequenciaC.ComSocket(strSequencia, dns.Host, dns.Port))
+                                            if (sequenciaC.ComSocket(strSequencia, dns.Host, dns.Port, pedidoController.FindAllNotSync().Count > 0))
                                             {
                                                 MunicipioController municipioC = new MunicipioController();
                                                 string strMunicipio = $"CARGAMUNICIPIO";
@@ -3807,7 +3835,6 @@ namespace EloPedidos.Views
                         txQtd.Enabled = false;
                         txQtd.Enabled = false;
 
-                        ckPrazo.Enabled = false;
                         ckBrinde.Enabled = false;
                         txDSCOBSER.Enabled = false;
                         ckCXPC.Checked = false;
@@ -3854,7 +3881,6 @@ namespace EloPedidos.Views
                 txDSCOBSER.Enabled = enable;
                 ckBrinde.Enabled = enable;
                 ckCXPC.Enabled = enable;
-                ckPrazo.Enabled = false;
                 btnExcluirProd.Enabled = enable;
                 btnSalvarProd.Enabled = enable;
                 btnSalvar.Enabled = enable;
@@ -3919,7 +3945,6 @@ namespace EloPedidos.Views
             if (new ConfigController().TestServerConnection("elosoftware.dyndns.org", 8560))
                 if (new FTPController().updateApp())
                     result = true;
-
 
             return result;
         }
@@ -4048,7 +4073,7 @@ namespace EloPedidos.Views
                 List<string> listaP = new List<string>();
                 var adapter = (AdapterItensPedido)listView.Adapter;
 
-                for (int i = 0; i <= adapter.Count - 1; i++)
+                for (int i = 0; i < adapter.Count; i++)
                 {
                     string INDBRINDE = "0";
 
@@ -4065,5 +4090,4 @@ namespace EloPedidos.Views
             base.OnSaveInstanceState(outState);
         }
     }
-
 }

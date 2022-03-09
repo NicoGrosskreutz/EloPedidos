@@ -406,6 +406,8 @@ namespace EloPedidos.Views
 
                 if (socket != null)
                 {
+                    if (!socket.IsConnected)
+                        printerController.ConnectPrinter(socket, impressora);
                     if (socket.IsConnected)
                     {
                         try

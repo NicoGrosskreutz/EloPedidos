@@ -398,7 +398,6 @@ namespace EloPedidos.Utils
                             {
                                 Ext.SavePreference(context, DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"), "DTHULVER");
                                 Ext.SavePreference(context, "1", "ISAUTHORIZED");
-
                             }
                             else
                             {

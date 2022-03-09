@@ -56,13 +56,10 @@ namespace EloPedidos.Controllers
 				p.LOCALIZACAO_ID = g.Id;
 
 				pedidoController.Save(p);
-
-				//pedidoController.ComSocket(p, out string msg);
 			}
 			catch (Exception ex)
 			{
 				Log.Error("Error", ex.ToString());
-				throw;
 			}
 		}
 
@@ -81,7 +78,6 @@ namespace EloPedidos.Controllers
 
 				var devolucaoController = new DevolucaoItemController();
 				DevolucaoItem devolucao = devolucaoController.FindById(pFT_PEDIDO_ITEM_DEVOLUCAO_ID);
-
 				devolucao.LOCALIZACAO_ID = g.Id;
 
 				devolucaoController.SaveItemDevolucao(devolucao);
@@ -89,7 +85,6 @@ namespace EloPedidos.Controllers
 			catch (Exception ex)
 			{
 				Log.Error("Error", ex.ToString());
-				throw;
 			}
 		}
 
@@ -108,7 +103,6 @@ namespace EloPedidos.Controllers
 
 				var baixaController = new BaixasPedidoController();
 				BaixasPedido baixa = baixaController.FindById(pFT_PEDIDO_BAIXA_ID);
-
 				baixa.LOCALIZACAO_ID = g.Id;
 
 				baixaController.SaveReceivement(baixa);
@@ -116,7 +110,6 @@ namespace EloPedidos.Controllers
 			catch (Exception ex)
 			{
 				Log.Error("Error", ex.ToString());
-				throw;
 			}
 		}
 
@@ -155,10 +148,22 @@ namespace EloPedidos.Controllers
 						Thread.Sleep(100);
 					}
 
-					var placemarks = await Geocoding.GetPlacemarksAsync(position.Latitude, position.Longitude);
+					string MUNIC = string.Empty;
 
-					Placemark placemark = placemarks?.FirstOrDefault();
-					string MUNIC = placemark.SubAdminArea;
+					if (new NetworkController().TestConnection())
+					{
+						try
+						{
+							var placemarks = await Geocoding.GetPlacemarksAsync(position.Latitude, position.Longitude);
+
+							Placemark placemark = placemarks?.FirstOrDefault();
+							MUNIC = placemark.SubAdminArea;
+						}
+						catch(Exception e)
+                        {
+							Log.Error("placemarks", e.ToString());
+                        }
+					}
 
 					var config = new Models.Config();
 					string CODMUNIC = new MunicipioController().FindCODMUNIC(MUNIC).ToString();
@@ -174,9 +179,16 @@ namespace EloPedidos.Controllers
 					};
 				}
 			}
-			catch
+			catch (Exception e)
 			{
-				throw;
+				Log.Error("GetLocalization", e.ToString());
+				return new Geolocator
+				{
+					Longitude = "",
+					Latitude = "",
+					NOMMUNIC = "",
+					DTHLOC = DateTime.Now
+				};
 			}
 		}
 

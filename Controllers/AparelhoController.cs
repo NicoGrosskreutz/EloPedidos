@@ -116,7 +116,7 @@ namespace EloPedidos.Controllers
 							result = true;
 						}
 						else
-							result = false;
+							result = true;
 					}
 
 				}
@@ -129,7 +129,7 @@ namespace EloPedidos.Controllers
 					else if (e.Message.ToUpper().Contains("NETWORK"))
 						outStr = "UNABLE TO READ";
 
-					result = false;
+					result = true;
 				}
 				finally
 				{

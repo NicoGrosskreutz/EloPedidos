@@ -126,7 +126,7 @@ namespace EloPedidos.Utils
 				document.Add(new Paragraph($"DATA DO RETORNO: {Pedido.DATERET.ToString("dd/MM/yyyy")}"));
 				document.Add(new Paragraph("================================================================="));
 
-				double toReceive = new PedidoController().totalReceberCliente(Pedido.CG_PESSOA_ID.Value, out string[] _Pedidos);
+				double toReceive = new PedidoController().totalReceberCliente(Pedido.ID_PESSOA.Value, out string[] _Pedidos);
 				if (toReceive > 0)
 				{
 					document.Add(new Paragraph($"SALDO DEVEDOR: {toReceive.ToString("C2")}"));

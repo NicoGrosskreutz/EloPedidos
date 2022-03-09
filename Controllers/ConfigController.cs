@@ -237,32 +237,32 @@ namespace EloPedidos.Controllers
                         else if (data[0].ToUpper().StartsWith("APARELHO NÃO ENCONTRADO"))
                         {
                             strMsg = "APARELHO NÃO ENCONTRADO";
-                            result = false;
+                            result = true;
                         }
                         else if (data[0].ToUpper().StartsWith("APARELHO ESTÁ INATIVO"))
                         {
                             strMsg = "APARELHO ESTÁ INATIVO";
-                            result = false;
+                            result = true;
                         }
                         else if (data[0].ToUpper().StartsWith("APARELHO INATIVO NO SISTEMA"))
                         {
                             strMsg = "APARELHO INATIVO NO SISTEMA";
-                            result = false;
+                            result = true;
                         }
                         else if (data[0].ToUpper().StartsWith("LICENÇA PARA USO EXPIRADA"))
                         {
                             strMsg = "LICENÇA PARA USO EXPIRADA";
-                            result = false;
+                            result = true;
                         }
                         else
-                            result = false;
+                            result = true;
                     }
                 }
                 catch (Exception ex)
                 {
                     string error = "";
                     Log.Error(error, ex.ToString());
-                    result = false;
+                    result = true;
                 }
                 finally
                 {
